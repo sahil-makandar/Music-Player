@@ -5,7 +5,7 @@ export const songs = [
     artist: "The Weeknd",
     album: "After Hours",
     coverUrl: "/images/album1.webp",
-    audioUrl: "/audio/song1.mp3",
+    audioUrl: "/audio/gorila-315977.mp3",
     duration: 215 // in seconds
   },
   {
@@ -14,7 +14,7 @@ export const songs = [
     artist: "The Weeknd",
     album: "After Hours",
     coverUrl: "/images/album1.webp",
-    audioUrl: "/audio/song2.mp3",
+    audioUrl: "/audio/gorila-315977.mp3",
     duration: 228
   },
   {
@@ -23,7 +23,7 @@ export const songs = [
     artist: "The Weeknd ft. Daft Punk",
     album: "Starboy",
     coverUrl: "/images/album1.webp",
-    audioUrl: "/audio/song3.mp3",
+    audioUrl: "/audio/gorila-315977.mp3",
     duration: 230
   },
   {
@@ -32,7 +32,7 @@ export const songs = [
     artist: "The Weeknd",
     album: "Dawn FM",
     coverUrl: "/images/album1.webp",
-    audioUrl: "/audio/song4.mp3",
+    audioUrl: "/audio/gorila-315977.mp3",
     duration: 240
   },
   {
@@ -41,7 +41,7 @@ export const songs = [
     artist: "The Weeknd",
     album: "Starboy",
     coverUrl: "/images/album1.webp",
-    audioUrl: "/audio/song5.mp3",
+    audioUrl: "/audio/gorila-315977.mp3",
     duration: 260
   }
 ];

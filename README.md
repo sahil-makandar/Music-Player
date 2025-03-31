@@ -1,16 +1,32 @@
-<<<<<<< HEAD
-# React + Vite
+# Modern Music Player
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+A sleek and intuitive music player web application that offers a seamless music listening experience. Built with modern web technologies, this player combines beautiful design with powerful functionality.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
 
-## Expanding the ESLint configuration
+### Installation
+1. Clone the repository
+```bash
+git clone https://github.com/sahil-makandar/Music-Player.git
+```
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# Music-Player
->>>>>>> 9d139ed6f58cd0e88d99b1b66c155144ae55acdf
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Start the development server
+```bash
+npm start
+```
+
+## License
+This project is licensed under the MIT License
+2. Include setup instructions for specific features?
+3. Add a section about supported audio formats?
+4. Include API documentation for any backend integration?

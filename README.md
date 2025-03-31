@@ -27,6 +27,3 @@ npm start
 
 ## License
 This project is licensed under the MIT License
-2. Include setup instructions for specific features?
-3. Add a section about supported audio formats?
-4. Include API documentation for any backend integration?

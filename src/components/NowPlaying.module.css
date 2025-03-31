@@ -1,0 +1,71 @@
+.nowPlayingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+}
+
+.albumCover {
+  width: 280px;
+  height: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2rem;
+  position: relative;
+  cursor: grab;
+}
+
+.albumCover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.albumCover:hover img {
+  transform: scale(1.05);
+}
+
+.songInfo {
+  text-align: center;
+  width: 100%;
+}
+
+.songTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.artistName {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+}
+
+.albumName {
+  font-size: 1rem;
+  color: #a0a0a0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .albumCover {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .songTitle {
+    font-size: 1.5rem;
+  }
+  
+  .artistName {
+    font-size: 1rem;
+  }
+}

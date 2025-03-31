@@ -1,0 +1,72 @@
+.controlsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.controlButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.controlButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.playPauseButton {
+  width: 4rem;
+  height: 4rem;
+  background: linear-gradient(135deg, #5000ff, #8a2be2);
+}
+
+.playPauseButton:hover {
+  background: linear-gradient(135deg, #6010ff, #9a3bf2);
+}
+
+.active {
+  color: #8a2be2;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.repeatOne {
+  position: absolute;
+  font-size: 0.6rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #8a2be2;
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .controlsContainer {
+    gap: 1rem;
+  }
+  
+  .controlButton {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .playPauseButton {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}

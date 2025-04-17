@@ -1,7 +1,5 @@
 # Melodify - Modern Music Player
 
-![Melodify](https://i.imgur.com/XYZ123.png)
-
 ## 🎵 Overview
 Melodify is a sleek and intuitive music player web application that offers a seamless music listening experience. Built with modern web technologies, this player combines beautiful design with powerful functionality.
 

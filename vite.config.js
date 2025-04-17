@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -12,7 +11,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    minify: 'terser',
+    minify: 'esbuild', // Changed from 'terser' to 'esbuild'
     chunkSizeWarningLimit: 1600,
   },
   optimizeDeps: {

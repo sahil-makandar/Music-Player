@@ -3,6 +3,21 @@
 ## Overview
 A sleek and intuitive music player web application that offers a seamless music listening experience. Built with modern web technologies, this player combines beautiful design with powerful functionality.
 
+## Features
+- 🎵 Sleek and modern UI
+- 🌓 Dark/Light theme support
+- 📱 Responsive design
+- 🎨 Beautiful animations
+- 🎼 Music visualization
+- 📑 Playlist management
+- ⚡ Fast and optimized performance
+
+## Tech Stack
+- React
+- Vite
+- Framer Motion
+- React Icons
+
 ## Getting Started
 
 ### Prerequisites
@@ -24,6 +39,10 @@ npm install
 ```bash
 npm start
 ```
+
+
+
+
 
 ## License
 This project is licensed under the MIT License

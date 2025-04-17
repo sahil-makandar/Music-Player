@@ -1,84 +1,82 @@
 import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { usePlayerContext } from '../context/PlayerContext';
 import styles from './ProgressBar.module.css';
 
 const ProgressBar = () => {
-  const { progress, seekTo, currentSong } = usePlayerContext();
+  const { progress, seekTo, audioRef } = usePlayerContext();
   const [isDragging, setIsDragging] = useState(false);
-  const [localProgress, setLocalProgress] = useState(progress);
+  const [dragProgress, setDragProgress] = useState(null);
   const progressBarRef = useRef(null);
   
   const formatTime = (seconds) => {
+    if (!seconds || isNaN(seconds)) return "0:00";
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
   
   const handleProgressClick = (e) => {
+    if (!progressBarRef.current) return;
+    
     const rect = progressBarRef.current.getBoundingClientRect();
-    const percent = ((e.clientX - rect.left) / rect.width) * 100;
-    seekTo(Math.max(0, Math.min(100, percent)));
+    const clickPosition = e.clientX - rect.left;
+    const newProgress = (clickPosition / rect.width) * 100;
+    
+    seekTo(newProgress);
   };
   
   const handleDragStart = () => {
     setIsDragging(true);
-    setLocalProgress(progress);
   };
   
-  const handleDrag = (e, info) => {
-    if (progressBarRef.current) {
-      const rect = progressBarRef.current.getBoundingClientRect();
-      const percent = ((e.clientX - rect.left) / rect.width) * 100;
-      setLocalProgress(Math.max(0, Math.min(100, percent)));
-    }
+  const handleDragMove = (e) => {
+    if (!isDragging || !progressBarRef.current) return;
+    
+    const rect = progressBarRef.current.getBoundingClientRect();
+    const clickPosition = e.clientX - rect.left;
+    const newProgress = Math.max(0, Math.min((clickPosition / rect.width) * 100, 100));
+    
+    setDragProgress(newProgress);
   };
   
   const handleDragEnd = () => {
-    seekTo(localProgress);
+    if (isDragging && dragProgress !== null) {
+      seekTo(dragProgress);
+    }
+    
     setIsDragging(false);
+    setDragProgress(null);
   };
   
-  const currentTimeInSeconds = (currentSong.duration * (isDragging ? localProgress : progress)) / 100;
+  const currentProgress = isDragging && dragProgress !== null ? dragProgress : progress;
+  const currentTime = audioRef.current ? formatTime(audioRef.current.currentTime) : "0:00";
+  const totalTime = audioRef.current ? formatTime(audioRef.current.duration) : "0:00";
   
   return (
     <div className={styles.progressContainer}>
-      <span className={styles.timeDisplay}>
-        {formatTime(currentTimeInSeconds)}
-      </span>
-      
-      <div 
-        className={styles.progressBarContainer} 
-        onClick={handleProgressClick}
-        ref={progressBarRef}
-      >
-        <div 
-          className={styles.progressBackground}
-        >
-          <div 
-            className={styles.progressFill}
-            style={{ width: `${isDragging ? localProgress : progress}%` }}
-          ></div>
-          
-          <motion.div 
-            className={styles.progressHandle}
-            style={{ left: `${isDragging ? localProgress : progress}%` }}
-            drag="x"
-            dragConstraints={progressBarRef}
-            dragElastic={0}
-            dragMomentum={false}
-            onDragStart={handleDragStart}
-            onDrag={handleDrag}
-            onDragEnd={handleDragEnd}
-            whileHover={{ scale: 1.2 }}
-            whileDrag={{ scale: 1.3 }}
-          />
-        </div>
+      <div className={styles.timeInfo}>
+        <span>{currentTime}</span>
+        <span>{totalTime}</span>
       </div>
       
-      <span className={styles.timeDisplay}>
-        {formatTime(currentSong.duration)}
-      </span>
+      <div 
+        className={styles.progressBar}
+        ref={progressBarRef}
+        onClick={handleProgressClick}
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+      >
+        <div 
+          className={styles.progressFill}
+          style={{ width: `${currentProgress}%` }}
+        ></div>
+        <div 
+          className={styles.progressHandle}
+          style={{ left: `${currentProgress}%` }}
+        ></div>
+      </div>
     </div>
   );
 };

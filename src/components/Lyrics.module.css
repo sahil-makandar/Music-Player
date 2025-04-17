@@ -1,0 +1,34 @@
+.lyricsContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.lyricsTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.lyricsContent {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.lyricsLine {
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.lyricsLine.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.noLyrics {
+  color: var(--text-secondary);
+  font-style: italic;
+}

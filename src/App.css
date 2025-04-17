@@ -1,82 +1,364 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body, html {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: linear-gradient(135deg, #121212, #1e1e1e);
-  color: #ffffff;
-  height: 100%;
-  overflow: hidden;
-}
-
-#root {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
+/* Fix the width issue by using flex layout instead of fixed margins */
 .app-container {
-  width: 100%;
-  height: 100%;
-  max-height: 800px;
   position: relative;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
+  display: flex;
 }
 
 .background-gradient {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #121212 0%, #2d1b4e 100%);
+  z-index: -1;
+  animation: gradientShift 15s ease infinite alternate;
+}
+
+.app-content {
+  margin-left: 70px; /* Match the navigation width */
+  width: calc(100% - 70px); /* Adjust width to account for navigation */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease;
+  overflow: auto; /* Changed from hidden to auto to allow scrolling */
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.app-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.theme-toggle, .player-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle:hover, .player-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.main-content-area {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Improve mini-player bar */
+.mini-player-bar {
+  height: 90px; /* Increased height */
+  background: rgba(20, 20, 30, 0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 50; /* Increased z-index */
+}
+
+.mini-player-bar:hover {
+  background: rgba(30, 30, 40, 0.98);
+  transform: translateY(-3px);
+}
+
+.mini-player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.mini-player-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.mini-player-cover {
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.mini-player-cover:hover {
+  transform: scale(1.05) translateY(-3px);
+}
+
+.mini-player-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-player-cover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at top right, rgba(138, 43, 226, 0.4), transparent 70%),
-              radial-gradient(circle at bottom left, rgba(80, 0, 255, 0.4), transparent 70%);
-  z-index: -1;
+  background: linear-gradient(135deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+  pointer-events: none;
+}
+
+.mini-player-info {
+  flex: 1;
+  margin: 0 1.5rem;
+  min-width: 0;
+}
+
+.mini-player-info h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem 0;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+}
+
+.mini-player-info p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-controls {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.mini-player-progress {
+  flex: 1;
+  max-width: 400px;
+  margin: 0 2rem;
+  position: relative;
+  z-index: 15;
+}
+
+.mini-player-controls button {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-player-controls button:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mini-player-controls .play-pause-btn {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  width: 48px;
+  height: 48px;
+  font-size: 1.3rem;
+}
+
+.mini-player-controls .play-pause-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+}
+
+/* Light theme styles for mini-player */
+.light-theme .mini-player-bar {
+  background: rgba(255, 255, 255, 0.95);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .mini-player-bar:hover {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.light-theme .mini-player-controls button {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-secondary);
+}
+
+.light-theme .mini-player-controls button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+}
+
+.light-theme .mini-player-info h3 {
+  color: var(--text-primary-light);
+}
+
+.light-theme .mini-player-info p {
+  color: var(--text-secondary-light);
+}
+
+.light-theme .mini-player-controls button {
+  color: var(--text-secondary-light);
+}
+
+.light-theme .mini-player-controls button:hover {
+  color: var(--text-primary-light);
+}
+
+/* Update media queries for responsive design */
+@media (max-width: 992px) {
+  .app-content {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+  }
 }
 
 @media (max-width: 768px) {
-  #root {
-    padding: 0.5rem;
+  .app-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem 0.5rem;
+  }
+  
+  .app-header {
+    padding-left: 3.5rem;
+  }
+  
+  .app-logo {
+    font-size: 1.2rem;
+  }
+  
+  .theme-toggle, .player-toggle {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .mini-player-controls {
+    gap: 1rem;
   }
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Light theme styles */
+.light-theme .background-gradient {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.light-theme {
+  --primary-color: #6200ea;
+  --secondary-color: #b388ff;
+  --accent-color: #ff4081;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --background: #f5f5f5;
+  --card-background: rgba(255, 255, 255, 0.8);
+  --hover-background: rgba(0, 0, 0, 0.05);
+  --border-color: rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.light-theme .app-header {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.card {
-  padding: 2em;
+.light-theme .musicPlayerContainer {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.read-the-docs {
-  color: #888;
+.light-theme .playlistItem {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.light-theme .playlistItem:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .playlistItem.active {
+  background: rgba(98, 0, 234, 0.08);
+  border: 1px solid rgba(98, 0, 234, 0.1);
+}
+
+.light-theme .playerHeader {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .sideSection {
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  transition: height 0.2s ease;
+}
+
+.progress-bar:hover {
+  height: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.light-theme .progress-bar {
+  background: rgba(0, 0, 0, 0.1);
 }

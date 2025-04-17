@@ -1,0 +1,125 @@
+.navContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px;  /* Reduced width */
+  height: 100vh;
+  background: rgba(20, 20, 30, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.navContainer:hover {
+  width: 200px;
+}
+
+.navLogo {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navItems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.navItem:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.navItem.active {
+  color: var(--text-primary);
+  background: rgba(138, 43, 226, 0.2);
+}
+
+.navItem.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--primary-color);
+}
+
+.navIcon {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  min-width: 24px;
+  text-align: center;
+}
+
+.navText {
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+}
+
+.navContainer:hover .navText {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Light theme styles */
+.lightMode {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.lightMode .navItem:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.lightMode .navItem.active {
+  background: rgba(98, 0, 234, 0.1);
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    width: 60px;
+    padding: 1rem 0;
+  }
+  
+  .navContainer:hover {
+    width: 60px;
+  }
+  
+  .navLogo {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .navItem {
+    padding: 0.75rem 0;
+    justify-content: center;
+  }
+  
+  .navIcon {
+    margin-right: 0;
+  }
+}

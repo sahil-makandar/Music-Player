@@ -1,72 +1,173 @@
 .controlsContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.mainControls {
+  display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin: 1.5rem 0;
-  width: 100%;
 }
 
 .controlButton {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   border: none;
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .controlButton:hover {
-  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
-.playPauseButton {
-  width: 4rem;
-  height: 4rem;
-  background: linear-gradient(135deg, #5000ff, #8a2be2);
+.controlButton.active {
+  color: var(--primary-color);
+  background: rgba(138, 43, 226, 0.2);
 }
 
-.playPauseButton:hover {
-  background: linear-gradient(135deg, #6010ff, #9a3bf2);
-}
-
-.active {
-  color: #8a2be2;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.repeatOne {
-  position: absolute;
-  font-size: 0.6rem;
-  top: 0.5rem;
-  right: 0.5rem;
-  background: #8a2be2;
+.playButton {
+  background: var(--primary-color);
+  color: white;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  width: 1rem;
-  height: 1rem;
+  border: none;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+  transition: all 0.3s ease;
+}
+
+.playButton:hover {
+  background: #9d4edd;
+  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
+  transform: scale(1.05);
+}
+
+.volumeButton, .settingsButton {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volumeButton:hover, .settingsButton:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.volumeControls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.volumeButton, .settingsButton {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.volumeButton:hover, .settingsButton:hover {
+  color: var(--text-primary);
+}
+
+.volumeSlider {
+  width: 100px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.volumeSlider:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.volumeSlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: var(--secondary-color);
+}
+
+.volumeSlider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.volumeSlider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  background: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
   .controlsContainer {
+    flex-direction: column;
     gap: 1rem;
   }
   
-  .controlButton {
-    width: 2.5rem;
-    height: 2.5rem;
+  .mainControls {
+    width: 100%;
+    justify-content: center;
   }
   
-  .playPauseButton {
-    width: 3.5rem;
-    height: 3.5rem;
+  .volumeControls {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .playButton {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
   }
 }
